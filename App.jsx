@@ -6,9 +6,11 @@
  */
 
 import React from 'react';
+import {useState} from 'react';
 import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -53,17 +55,37 @@ function Section({children, title}) {
   );
 }
 
+
 function App(){
+
+  const [tasks, setTasks] = useState([
+    'Do laundry',
+    'Go to gym',
+    'Walk dog',
+  ]);
+  
+  const addTask = (taskText) => {
+    if (taskText === '') {
+      Alert.alert('Please enter a task');
+      return;
+    }else if (tasks.includes(taskText)) {
+      Alert.alert('Task already exists');
+      return;
+    }else{
+      setTasks([...tasks, taskText]);
+    }
+  }
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter, 
   };
 
   return (
     <>
-      <ToDoList />
-      <ToDoForm />    
+      <ToDoList tasks={tasks}/>
+      <ToDoForm addTask={addTask}/>    
     </>
     );
 }

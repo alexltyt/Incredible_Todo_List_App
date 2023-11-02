@@ -3,38 +3,37 @@ import { View, Text, Pressable, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 
-const ToDoList = () => {
+const ToDoList = ({ tasks }) => {
   return (
     <ScrollView>
-        <Pressable>
-          <View style={[styles.task, styles.completed]}>
-            <Text style={styles.taskText}>Do laundry</Text>
+      {tasks.map((task, index) => (
+        <Pressable key={index}>
+          <View style={[styles.task,index % 2 === 0 ? styles.evenTask : styles.oddTask]}>
+            <Text style={styles.taskText}>{task}</Text>
           </View>
         </Pressable>
-        <Pressable>
-          <View style={[styles.task]}>
-            <Text style={styles.taskText}>Go to gym</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View style={[styles.task, styles.completed]}>
-            <Text style={styles.taskText}>Walk dog</Text>
-          </View>
-        </Pressable>
-      </ScrollView>
+      ))}
+    </ScrollView>
   );
-}
+};
 const styles = StyleSheet.create({
   task: {
     padding: 10,
     borderBottomWidth: 1,
     borderColor: '#ccc',
   },
+  evenTask: {
+    backgroundColor: '#FFCF96', 
+  },
+  oddTask: {
+    backgroundColor: '#CDFAD5', 
+  },
   completed: {
     backgroundColor: '#e0e0e0',
   },
   taskText: {
     fontSize: 16,
+    color: '#61A3BA',
   },
   form: {
     flexDirection: 'row',
