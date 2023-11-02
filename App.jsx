@@ -6,6 +6,8 @@
  */
 
 import React from 'react';
+import ToDoList from './ToDoList';
+import ToDoForm from './ToDoForm';
 import {
   SafeAreaView,
   ScrollView,
@@ -59,7 +61,10 @@ function App(){
   };
 
   return (
-    
+    <>
+      <ToDoList />
+      <ToDoForm />    
+    </>
     );
 }
 
