@@ -7,8 +7,8 @@
 
 import React from 'react';
 import {useState} from 'react';
-import ToDoList from './ToDoList';
-import ToDoForm from './ToDoForm';
+import ToDoList from './components/ToDoList';
+import ToDoForm from './components/ToDoForm';
 import {
   Alert,
   SafeAreaView,
@@ -28,6 +28,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import AboutScreen from './screens/AboutScreen';
 
 function Section({children, title}) {
   const isDarkMode = useColorScheme() === 'dark';
@@ -58,35 +62,24 @@ function Section({children, title}) {
 
 function App(){
 
-  const [tasks, setTasks] = useState([
-    'Do laundry',
-    'Go to gym',
-    'Walk dog',
-  ]);
-  
-  const addTask = (taskText) => {
-    if (taskText === '') {
-      Alert.alert('Please enter a task');
-      return;
-    }else if (tasks.includes(taskText)) {
-      Alert.alert('Task already exists');
-      return;
-    }else{
-      setTasks([...tasks, taskText]);
-    }
-  }
-
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter, 
   };
 
+  const Stack = createStackNavigator();
+
   return (
-    <>
-      <ToDoList tasks={tasks}/>
-      <ToDoForm addTask={addTask}/>    
-    </>
+    <NavigationContainer>
+      <>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+
+      </>
+    </NavigationContainer>
     );
 }
 
