@@ -4,6 +4,8 @@ import ToDoList from '../components/ToDoList';
 import ToDoForm from '../components/ToDoForm';
 import { View,Button,Text,Alert,StyleSheet } from 'react-native';
 import MainLayout from '../layouts/MainLayout';
+import ChuckNorrisFact from '../components/ChuckNorrisFact';
+import GOTQuote from '../components/GOTQuote';
 
 const HomeScreen = ({ navigation }) => {
     const [tasks, setTasks] = useState([
@@ -26,8 +28,9 @@ const HomeScreen = ({ navigation }) => {
     
   return (
     <MainLayout style={styles.container}>
-            <ToDoList tasks={tasks}/> 
-            <ToDoForm addTask={addTask}/>    
+          <GOTQuote />
+          <ToDoList tasks={tasks}/> 
+          <ToDoForm addTask={addTask}/>    
         <View>
         <Button
                 title="Go to About"

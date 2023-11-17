@@ -6,6 +6,10 @@ import { StyleSheet } from 'react-native';
 const ToDoList = ({ tasks }) => {
   return (
     <ScrollView>
+      <View style={{borderBottomWidth: 5, borderColor: '#ccc',marginTop: 20,marginBottom:20}} />
+      <Text style={styles.title}>
+        ToDoList
+      </Text>
       {tasks.map((task, index) => (
         <Pressable key={index}>
           <View style={[styles.task,index % 2 === 0 ? styles.evenTask : styles.oddTask]}>
@@ -21,6 +25,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderColor: '#ccc',
+  },
+  title: {
+    fontSize: 30,
+    color: '#3DB3C1',
+    textAlign: 'center',
+    
   },
   evenTask: {
     backgroundColor: '#FFCF96', 
